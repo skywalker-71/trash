@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Skywalker – Portfolio</title>
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Poppins:wght@600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+      :root {
+      --bg-light: #ffffff;
+      --bg-dark:  #111111;
+      --text-light: #000000;
+      --text-dark:  #eeeeee;
+      --accent:    #7aa2f7;
+      }
+      @media (prefers-color-scheme: dark) {
+      body {
+      background: var(--bg-dark);
+      color: var(--text-dark);
+      }
+      a { color: var(--accent); }
+      }
+      @media (prefers-color-scheme: light) {
+      body {
+      background: var(--bg-light);
+      color: var(--text-light);
+      }
+      a { color: var(--accent); }
+      }
+      body {
+      margin: 0 auto;
+      max-width: 900px;
+      font-family: "Inter", system-ui, sans-serif;
+      padding: 2rem;
+      line-height: 1.6;
+      }
+      /* Smooth theme + UI transitions */
+      body, a, h1, h2, p, footer {
+      transition: all 0.35s ease;
+      }
+      /* Rounded modern heading font */
+      h1, h2 {
+      margin: 0.2em 0;
+      font-family: "Poppins", sans-serif;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+      }
+      a { 
+      text-decoration: none; 
+      position: relative;
+      font-weight: 500;
+      }
+      /* Animated underline */
+      a::after {
+      content: "";
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.25s ease;
+      border-radius: 3px;
+      }
+      a:hover::after {
+      width: 100%;
+      }
+      .intro-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1.4rem;
+      text-align: center;
+      }
+      @media (min-width: 700px) {
+      .intro-container {
+      flex-direction: row;
+      text-align: left;
+      align-items: center;
+      }
+      }
+      .avatar {
+      width: clamp(140px, 22vw, 200px);
+      height: clamp(140px, 22vw, 200px);
+      border-radius: 50%;
+      border: 4px solid var(--accent);
+      object-fit: cover;
+      box-shadow: 0 0 20px rgba(122,162,247,0.35);
+      }
+      .socials {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      }
+      /* Center on mobile */
+      @media (max-width: 700px) {
+      .socials {
+      justify-content: center;
+      }
+      }
+      .social-icon {
+      width: 20px; /* smaller */
+      height: 20px;
+      filter: invert(0);
+      transition: transform 0.2s ease, opacity 0.2s ease;
+      opacity: 0.85;
+      vertical-align: middle;
+      }
+      .social-icon:hover {
+      transform: translateY(-2px) scale(1.05);
+      opacity: 1;
+      }
+      /* Dark mode auto white */
+      @media (prefers-color-scheme: dark) {
+      .social-icon {
+      filter: invert(1);
+      }
+      }
+      p {
+      font-family: "Inter", sans-serif;
+      font-weight: 400;
+      }
+      /* Reset spans so years isn't monospace */
+      span {
+      font-family: "Inter", sans-serif;
+      }
+      /* JetBrains only where useful */
+      .stats-img {
+      font-family: "JetBrains Mono", monospace;
+      }
+      .section {
+      margin-top: 3rem;
+      }
+      /* Tech Stack scroll container */
+      .skills-container {
+      width: 100%;
+      overflow-x: auto;
+      padding-bottom: 4px;
+      -webkit-overflow-scrolling: touch;
+      text-align: center;
+      scrollbar-width: thin;
+      scrollbar-color: var(--accent) transparent;
+      }
+      .skills-container img {
+      max-width: none;
+      height: auto;
+      }
+      /* GitHub stats layout */
+      .stats-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      }
+      .stats-img {
+      max-width: 100%;
+      }
+      @media (min-width: 700px) {
+      .stats-wrapper {
+      flex-direction: row;
+      justify-content: flex-start;
+      align-items: flex-start;
+      gap: 2rem;
+      }
+      .stats-img {
+      max-width: 46%;
+      }
+      }
+      /* Floating hover effect */
+      .avatar,
+      .stats-img,
+      .skills-container img {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+      .avatar:hover,
+      .stats-img:hover,
+      .skills-container img:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 6px 15px rgba(122,162,247,0.25);
+      }
+      footer {
+      text-align: center;
+      opacity: 0.7;
+      font-size: 0.9rem;
+      margin-top: 3rem;
+      padding-bottom: 1.5rem;
+      font-family: "Inter", sans-serif;
+      }
+      /* Align emojis nicely with text */
+      .emoji {
+      vertical-align: middle;
+      }
+      /* Hand emoji before link */
+      .link-emoji {
+      vertical-align: middle;
+      margin-right: 6px;
+      }
+      /* Improve link spacing & hit area */
+      .projects-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      }
+      /* Fade-in Reveal */
+      .fade-in {
+      opacity: 0;
+      transform: translateY(10px);
+      animation: fadeInUp 0.6s ease forwards;
+      }
+      @keyframes fadeInUp {
+      to {
+      opacity: 1;
+      transform: translateY(0);
+      }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="intro-container fade-in">
+      <img class="avatar" src="https://gcdnb.pbrd.co/images/f9Nek7kjMiAA.jpg?o=1" alt="Profile Picture">
+      <div class="intro-text">
+        <h1>Hi! I'm Skywalker <img src="https://raw.githubusercontent.com/MartinHeinz/MartinHeinz/master/wave.gif" width="28"></h1>
+        <p>
+          I’m a self-taught programmer from India.
+          I love building and contributing to open-source projects, and over the past 
+          <span id="exp-years"></span>, I’ve worked on quite a few of them..
+        </p>
+        <script>
+          const start = new Date(2021, 7, 21);
+          const now = new Date();
+          
+          let years = now.getFullYear() - start.getFullYear();
+          
+          if (
+            now.getMonth() < start.getMonth() ||
+            (now.getMonth() === start.getMonth() && now.getDate() < start.getDate())
+          ) {
+            years--;
+          }
+          
+          const words = [
+            "zero","one","two","three","four","five",
+            "six","seven","eight","nine","ten",
+            "eleven","twelve","thirteen","fourteen","fifteen",
+            "sixteen","seventeen","eighteen","nineteen","twenty"
+          ];
+          
+          let text = words[Math.max(0, Math.min(years, 20))] + " year" + (years !== 1 ? "s" : "");
+          
+          document.getElementById("exp-years").textContent = text;
+        </script>
+        <p><img src="https://komarev.com/ghpvc/?username=skywalker-71&style=flat&abbreviated=true" alt="Profile Views"></p>
+        <p class="socials">
+          <a href="https://github.com/skywalker-71" target="_blank">
+          <img class="social-icon" src="https://cdn.simpleicons.org/github/000" alt="GitHub">
+          </a>
+          <a href="https://skywalker_in.t.me" target="_blank">
+          <img class="social-icon" src="https://cdn.simpleicons.org/telegram/000" alt="Telegram">
+          </a>
+          <a href="mailto:owner@krypton.eu.org">
+          <img class="social-icon" src="https://cdn.simpleicons.org/maildotru/000" alt="Email">
+          </a>
+        </p>
+      </div>
+    </section>
+    <section class="section fade-in">
+      <h2>Tech Stack</h2>
+      <div class="skills-container">
+        <img src="https://skillicons.dev/icons?i=java,python,c,cpp,vscode,linux,git,github,markdown" alt="Skills">
+      </div>
+    </section>
+    <section class="section fade-in">
+      <h2>GitHub Stats</h2>
+      <div class="stats-wrapper">
+        <img class="stats-img" src="https://raw.githubusercontent.com/skywalker-71/github-stats-transparent/output/generated/overview.svg" alt="Stats Overview">
+        <img class="stats-img" src="https://raw.githubusercontent.com/skywalker-71/github-stats-transparent/output/generated/languages.svg" alt="Most Used Languages">
+      </div>
+    </section>
+    <section class="section fade-in">
+      <h2>
+        Projects
+        <img src="https://raw.githubusercontent.com/Tarikul-Islam-Anik/Animated-Fluent-Emojis/master/Emojis/Animals/Fallen%20Leaf.png" alt="Fallen Leaf" width="25" height="25" />
+      </h2>
+      <p>Too lazy to update this website 😴</p>
+    </section>
+    <footer>
+      <p id="footer-text"></p>
+    </footer>
+    <script>
+      const year = new Date().getFullYear();
+      document.getElementById("footer-text").textContent =
+        `© ${year} Skywalker — This website ages like fine wine… unattended.`;
+    </script>
+  </body>
+</html>
